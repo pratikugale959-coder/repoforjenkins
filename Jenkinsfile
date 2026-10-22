@@ -5,6 +5,11 @@ pipeline {
                 description: 'Target')
     }
     stages {
-        // stages go here 
+        stage('Tests') {
+            parallel {
+                stage('Unit') { steps { bat 'echo Unit tests' } }
+                stage('integration') { steps { bat 'echo Integration tests' } }
+            }
+        }
     }
 }
