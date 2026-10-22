@@ -11,5 +11,10 @@ pipeline {
                 stage('integration') { steps { bat 'echo Integration tests' } }
             }
         }
+        stage('Package') { steps { bat 'package.bat' } }
+        post {
+            success { srchiveArtifacts artifacts: 'dist/**' }
+            failure { echo 'CI pipeline failed' }
+        }
     }
 }
